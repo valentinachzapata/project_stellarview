@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellarview: más de lo que puedes ver y saber</title>
+    {% load static %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Yellowtail&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://kit.fontawesome.com/50a2eb68e4.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="menu">
+        <div class="logo_icon">
+            <div class="_icon"><span class="icon"><i class="bx bxs-star"></i></span></div>
+            <span class="logo_name">Stellarview</span>
+        </div>
+
+        <ul class="menu_items">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="#">Tópicos</a></li>
+            <li><a href="#">Hablemos</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+        </ul>
+
+        <span class="btn_menu">
+            <i class="bx bx-menu"></i>
+        </span>
+    </nav>
+<section>
+    <div class="column">
+        <h3>Register</h3>
+
+        <ul class="messages">
+            {% for message in messages %}
+            {% if messages %}
+            {%if "register" in message.tags %}
+            <li>{{ message }}</li>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </ul>
+        <form action='users/create/' method='post'>
+            {% csrf_token %}
+            Name: <input type='text' name='name'><br/>
+            Username: <input type='text' name='username'><br/>
+            Password: <input type='password' name='password1'><br/>
+            <span>Password should be at least 8 characters.</span><br/>
+            Confirm PW: <input type="password" name="password2"><br/>
+            Date Hired: <input type="date" id="start" name="date_hired" value="" min="1900-1-1" max="2021-12-04"><br/>
+            <button type='submit'>Register</button>
+        </form>
+    </div>
+    <div class="column">
+        <h3>Login</h3>
+
+        <ul class="messages">
+            {% for message in messages %}
+            {% if messages %}
+            {%if "login" in message.tags %}
+            <li>{{ message }}</li>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </ul>
+        <form action='users/login/' method='post'>
+            {% csrf_token %}
+            Username: <input type='text' name='username'><br/>
+            Password: <input type='password' name='password'><br/>
+            <button type='submit'>Login</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>
